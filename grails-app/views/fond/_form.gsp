@@ -1,7 +1,5 @@
 <%@ page import="com.cv.Fond" %>
 
-
-
 <div class="fieldcontain ${hasErrors(bean: fondInstance, field: 'abreviation', 'error')} ">
     <label for="abreviation">
         <g:message code="fond.abreviation.label" default="Abreviation"/>
