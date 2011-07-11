@@ -33,7 +33,7 @@ class Societe {
     Date dateSortie
     String modeDeSortie
     String commentaires
-
+    ArrayList<Fond> listFond;
 
 
     static constraints = {

@@ -60,11 +60,11 @@ body {
 }
 
 a:visited, a:hover {
-	color: red;
+	color: #00008B;
 }
 
 a:hover, a:active {
-	outline: red;/* prevents outline in webkit on active links but retains it for tab focus */
+	outline: #00008B;/* prevents outline in webkit on active links but retains it for tab focus */
 }
 
 h1 {
