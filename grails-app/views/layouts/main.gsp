@@ -13,7 +13,6 @@
     <link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
     <link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
-    <link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
 
 
     <script src="http://www.google.com/jsapi?key=${YOURSITEKEY}" type="text/javascript"></script>
@@ -22,7 +21,7 @@
     </script>
     <g:javascript library="jquery" plugin="jquery"/>
     <g:layoutHead/>
-    <gui:resources components="richEditor, datePicker"/>
+    <gui:resources components="richEditor, datePicker, menu"/>
     <script>
         YAHOO.util.Event.onDOMReady(function() {
             function selectHandler() {
@@ -35,62 +34,88 @@
 </head>
 
 <body class="yui-skin-sam">
+
 <table><tr>
     <div id="grailsLogo" role="banner"><a href="/CV1/index.gsp"><img
             src="${resource(dir: 'images', file: 'banner.png')}" alt="Grails"/></a></div>
 </tr>
-    </table>
-<div align="right">
-        <sec:ifNotLoggedIn>
-            <g:link controller="login" action="auth">Login</g:link>
-        </sec:ifNotLoggedIn>
-        <sec:ifAnyGranted roles="ROLE_USER_ALEX, ROLE_ADMIN"><sec:username/>
-            (<g:link controller="logout">sign out</g:link>)</sec:ifAnyGranted>
-</div>
+</table>
+
 <div class='content'>
-<div class='nav'>
-         <table>
-             <tr>
-                 <td>
-                     <span class="menuButton">
-                    <g:link class="list" url="/CV1/index.gsp">
-                        Home
-                    </g:link>
+
+    <div class='nav'>
+        <table>
+            <tr>
+                <td>
+                    <span class="menuButton">
+                        <g:link class="home" url="/CV1/index.gsp">
+                            Home
+                        </g:link>
                     </span>.
-                    </td>
-                 <td>
-                     <span class="menuButton">
-                    <g:link class="list" controller="contact" action="list">
-                        Contacts
-                    </g:link>
+                </td>
+                <td>
+                    <span class="menuButton">
+                        <g:link class="list" controller="contact" action="list">
+                            Contacts
+                        </g:link>
                     </span>.
-                    </td>
-                 <td>
-                     <span class="menuButton">
-                    <g:link class="list" controller="societe" action="list">
-                        Societes
-                    </g:link>
-                         </span>
-                    </td>
-                 <td>
-                     <span class="menuButton">
-                    <g:link class="list" controller="fond" action="list">
-                        Fonds
-                    </g:link>
-                         </span>
-                 </td>
-             </tr>
+                </td>
+                <td>
+                    <span class="menuButton">
+                        <g:link class="list" controller="societe" action="list">
+                            Societes
+                        </g:link>
+                    </span>
+                </td>
+                <td>
+                    <span class="menuButton">
+                        <g:link class="list" controller="fond" action="list">
+                            Fonds
+                        </g:link>
+                    </span>
+                </td>
+                <td>
+                    <span class="menuButton">
+                        <g:link class="list" controller="utilisateur" action="list">
+                            Administration
+                        </g:link>
+                    </span>
+                </td>
+                <td>
+                    <sec:ifNotLoggedIn>
+                        <span class="menuButton">
+                            <g:link class="create" controller="login" action="auth">
+                                Login
+                            </g:link>
+                        </span>
+                    </sec:ifNotLoggedIn>
+                    <sec:ifAnyGranted roles="ROLE_USER_ALEX, ROLE_ADMIN">
+                        <sec:username/>
+                    </sec:ifAnyGranted>
+                </td>
+                <td>
+                    <sec:ifAnyGranted roles="ROLE_USER_ALEX, ROLE_ADMIN">
+                    <span class="menuButton">
+                        <g:link class="delete" controller="logout">
+                            Logout
+                        </g:link>
+                    </span>
+                    </sec:ifAnyGranted>
+                </td>
+            </tr>
 
-             </table>
-            </div>
+        </table>
+    </div>
 
-<g:layoutBody/>
+    <g:layoutBody/>
 
-<div class='footer'>
-      <p>Capital Venture by <a href="http://www.google.fr">Alex</a>, powered by <a href="http://grails.org/">Grails</a>.</p>
-</div>
+    <div class='footer' align="middle">
+        <p>Capital Venture by <a href="http://www.google.fr">Alex</a>, powered by <a
+                href="http://grails.org/">Grails</a>.</p>
+    </div>
 
-<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
-<g:javascript library="application"/>
+    <div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt"
+                                                                       default="Loading&hellip;"/></div>
+    <g:javascript library="application"/>
 </body>
 </html>

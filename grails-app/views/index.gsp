@@ -227,10 +227,11 @@ input {
 
 <body>
     <div id="mainContainer">
+
     <div id="left" class="subContainer greyBox">
 
         <td valign="top" width="75%">
-            <strong style="color: blue;">Welcome To</strong><strong style="color: rgb(255, 163, 25);">CV</strong><strong
+            <strong style="color: blue;">Welcome To</strong><strong style="color: rgb(255, 163, 25);"> CV </strong><strong
                 style="color: blue;">!</strong><br/><br/><br/>
         </td>
 
