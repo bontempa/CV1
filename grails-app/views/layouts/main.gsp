@@ -32,7 +32,6 @@
             GRAILSUI.dateCreation.selectEvent.subscribe(selectHandler);
         });
     </script>
-
 </head>
 
 <body class="yui-skin-sam">
@@ -40,15 +39,56 @@
     <div id="grailsLogo" role="banner"><a href="/CV1/index.gsp"><img
             src="${resource(dir: 'images', file: 'banner.png')}" alt="Grails"/></a></div>
 </tr>
-    <tr>
+    </table>
+<div align="right">
         <sec:ifNotLoggedIn>
             <g:link controller="login" action="auth">Login</g:link>
         </sec:ifNotLoggedIn>
-        <sec:ifAnyGranted roles="ROLE_USER_ALEX, ROLE_ADMIN"><sec:username/> (<g:link
-                controller="logout">sign out</g:link>)</sec:ifAnyGranted>
-    </tr></table>
+        <sec:ifAnyGranted roles="ROLE_USER_ALEX, ROLE_ADMIN"><sec:username/>
+            (<g:link controller="logout">sign out</g:link>)</sec:ifAnyGranted>
+</div>
+<div class='content'>
+<div class='nav'>
+         <table>
+             <tr>
+                 <td>
+                     <span class="menuButton">
+                    <g:link class="list" url="/CV1/index.gsp">
+                        Home
+                    </g:link>
+                    </span>.
+                    </td>
+                 <td>
+                     <span class="menuButton">
+                    <g:link class="list" controller="contact" action="list">
+                        Contacts
+                    </g:link>
+                    </span>.
+                    </td>
+                 <td>
+                     <span class="menuButton">
+                    <g:link class="list" controller="societe" action="list">
+                        Societes
+                    </g:link>
+                         </span>
+                    </td>
+                 <td>
+                     <span class="menuButton">
+                    <g:link class="list" controller="fond" action="list">
+                        Fonds
+                    </g:link>
+                         </span>
+                 </td>
+             </tr>
+
+             </table>
+            </div>
+
 <g:layoutBody/>
-<div class="footer" role="contentinfo"></div>
+
+<div class='footer'>
+      <p>Capital Venture by <a href="http://www.google.fr">Alex</a>, powered by <a href="http://grails.org/">Grails</a>.</p>
+</div>
 
 <div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 <g:javascript library="application"/>
