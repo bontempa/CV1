@@ -17,6 +17,7 @@ class UtilisateurController {
      @Secured(['ROLE_USER_ALEX'])
 	def list = {
 		params.max = Math.min(params.max ? params.int('max') : 10, 100)
+
 		[utilisateurInstanceList: Utilisateur.list(params), utilisateurInstanceTotal: Utilisateur.count()]
 	}
 
