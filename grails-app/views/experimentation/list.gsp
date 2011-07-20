@@ -9,6 +9,9 @@
 <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon"/>
 <g:javascript library="application"/>
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<g:javascript library="FiltersFeature"/>
+<g:javascript library="Filter"/>
+<g:javascript library="StringFilter"/>
 <script type="text/javascript">
     Ext.onReady(function() {
         Ext.QuickTips.init();
@@ -60,23 +63,57 @@
     });
 </script>
 <script type="text/javascript">
-    /*
 
-     This file is part of Ext JS 4
+    Ext.define('Product', {
+    extend: 'Ext.data.Model',
+    fields: [{
+        name: 'company'
+    }, {
+        name: 'price',
+        type: 'float'
+    }, {
+        name: 'date',
+        type: 'date',
+        dateFormat: 'Y-m-d'
+    }]
+});
 
-     Copyright (c) 2011 Sencha Inc
-
-     Contact:  http://www.sencha.com/contact
-
-     GNU General Public License Usage
-     This file may be used under the terms of the GNU General Public License version 3.0 as published by the Free Software Foundation and appearing in the file LICENSE included in the packaging of this file.  Please review the following information to ensure the GNU General Public License version 3.0 requirements will be met: http://www.gnu.org/copyleft/gpl.html.
-
-     If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
-
-     */
     Ext.onReady(function() {
 
         Ext.QuickTips.init();
+
+        // sample static data for the store
+    var myData = [
+        ['3m Co',                               71.72,  '9/1 12:00am'],
+        ['Alcoa Inc',                           29.01,  '9/1 12:00am'],
+        ['Altria Group Inc',                    83.81,  '9/1 12:00am'],
+        ['American Express Company',            52.55,  '9/1 12:00am'],
+        ['American International Group, Inc.',  64.13,  '9/1 12:00am'],
+        ['AT&T Inc.',                           31.61,  '9/1 12:00am'],
+        ['Boeing Co.',                          75.43,  '9/1 12:00am'],
+        ['Caterpillar Inc.',                    67.27,  '9/1 12:00am'],
+        ['Citigroup, Inc.',                     49.37,  '9/1 12:00am'],
+        ['E.I. du Pont de Nemours and Company', 40.48,  '9/1 12:00am'],
+        ['Exxon Mobil Corp',                    68.1,   '9/1 12:00am'],
+        ['General Electric Company',            34.14,  '9/1 12:00am'],
+        ['General Motors Corporation',          30.27,  '9/1 12:00am'],
+        ['Hewlett-Packard Co.',                 36.53,  '9/1 12:00am'],
+        ['Honeywell Intl Inc',                  38.77,  '9/1 12:00am'],
+        ['Intel Corporation',                   19.88,  '9/1 12:00am'],
+        ['International Business Machines',     81.41,  '9/1 12:00am'],
+        ['Johnson & Johnson',                   64.72,  '9/1 12:00am'],
+        ['JP Morgan & Chase & Co',              45.73,  '9/1 12:00am'],
+        ['McDonald\'s Corporation',             36.76,  '9/1 12:00am'],
+        ['Merck & Co., Inc.',                   40.96,  '9/1 12:00am'],
+        ['Microsoft Corporation',               25.84,  '9/1 12:00am'],
+        ['Pfizer Inc',                          27.96,  '9/1 12:00am'],
+        ['The Coca-Cola Company',               45.07,  '9/1 12:00am'],
+        ['The Home Depot, Inc.',                34.64,  '9/1 12:00am'],
+        ['The Procter & Gamble Company',        61.91,  '9/1 12:00am'],
+        ['United Technologies Corporation',     63.26,  '9/1 12:00am'],
+        ['Verizon Communications',              35.57,  '9/1 12:00am'],
+        ['Wal-Mart Stores, Inc.',               45.45,  '9/1 12:00am']
+    ];
 
         // configure whether filter query is encoded or not (initially)
         var encode = false;
@@ -84,18 +121,28 @@
         // configure whether filtering is performed locally or remotely (initially)
         var local = true;
 
-        var store = Ext.create('Ext.data.JsonStore', {
-            // store configs
-            autoDestroy: true,
-            proxy: {
-                type: 'ajax',
-                url: 'malistea'
+        // create the data store
+    var store = Ext.create('Ext.data.ArrayStore', {
+        fields: [
+           {name: 'company'},
+           {name: 'price',      type: 'float'},
+           {name: 'lastChange', type: 'date', dateFormat: 'n/j h:ia'}
+        ],
+        data: myData
+    });
 
-            },
-            pageSize: 50
-        });
+        var filters = {
+            ftype: 'filters',
+            encode: encode,
+            local: local,
+            filters: [{
+                type: 'string',
+                dataIndex: 'company',
+                store: 'store',
+                labelField: 'company'
 
-
+            }]
+            };
 
         // use a factory method to reduce code while demonstrating
         // that the GridFilter plugin may be configured with or without
@@ -104,14 +151,20 @@
 
             var columns = [
                 {
-                    dataIndex: 'type',
-                    text: 'type',
-                    width: 30
+                    dataIndex: 'company',
+                    text: 'Societe',
+                    width: 200,
+                    filterable: true,
+                    filter: {
+                type: 'string'
+                // specify disabled to disable the filter menu
+                //, disabled: true
+            }
                 },
                 {
-                    dataIndex: 'quantite',
-                    text: 'quantite',
-                    id: 'quantite'
+                    dataIndex: 'price',
+                    text: 'Prix',
+                    id: 'price'
                 }
             ];
 
@@ -123,14 +176,16 @@
             store: store,
             columns: createColumns(2),
             loadMask: true,
+            features: [filters],
             dockedItems: [Ext.create('Ext.toolbar.Paging', {
                 dock: 'bottom',
                 store: store
             })]
         });
 
+
         var win = Ext.create('Ext.Window', {
-            title: 'Grid Filters Example',
+            title: 'Exemple de Grid',
             height: 400,
             width: 700,
             layout: 'fit',
