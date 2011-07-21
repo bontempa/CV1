@@ -1,6 +1,13 @@
 <%@ page import="com.cv.Societe" %>
 
 
+<div class="fieldcontain ${hasErrors(bean: societeInstance, field: 'nomSGP', 'error')} ">
+	<label for="nomSGP">
+		<g:message code="societe.nomSGP.label" default="Nom SGP" />
+
+	</label>
+	<g:textField name="nomSGP" value="${societeInstance?.nomSGP}"/>
+</div>
 
 <div class="fieldcontain ${hasErrors(bean: societeInstance, field: 'abreviation', 'error')} ">
 	<label for="abreviation">
@@ -170,13 +177,7 @@
 	<g:textField name="nomResponsable" value="${societeInstance?.nomResponsable}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: societeInstance, field: 'nomSGP', 'error')} ">
-	<label for="nomSGP">
-		<g:message code="societe.nomSGP.label" default="Nom SGP" />
-		
-	</label>
-	<g:textField name="nomSGP" value="${societeInstance?.nomSGP}"/>
-</div>
+
 
 <div class="fieldcontain ${hasErrors(bean: societeInstance, field: 'participationActive', 'error')} required">
 	<label for="participationActive">

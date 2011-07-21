@@ -26,24 +26,17 @@
     <table>
         <thead>
         <tr>
-
             <g:sortableColumn property="abreviation"
                               title="${message(code: 'fond.abreviation.label', default: 'Abreviation')}"/>
 
-            <g:sortableColumn property="commentairePartA"
-                              title="${message(code: 'fond.commentairePartA.label', default: 'Commentaire Part A')}"/>
+            <g:sortableColumn property="raisonSociale"
+                              title="${message(code: 'fond.raisonSociale.label', default: 'Raison Sociale')}"/>
 
-            <g:sortableColumn property="commentairePartB"
-                              title="${message(code: 'fond.commentairePartB.label', default: 'Commentaire Part B')}"/>
+            <g:sortableColumn property="responsable"
+                              title="${message(code: 'fond.responsable.label', default: 'Responsable')}"/>
 
-            <g:sortableColumn property="dateCreation"
-                              title="${message(code: 'fond.dateCreation.label', default: 'Date Creation')}"/>
-
-            <g:sortableColumn property="devise" title="${message(code: 'fond.devise.label', default: 'Devise')}"/>
-
-            <g:sortableColumn property="formeJuridique"
-                              title="${message(code: 'fond.formeJuridique.label', default: 'Forme Juridique')}"/>
-
+            <g:sortableColumn property="role"
+                              title="${message(code: 'fond.role.label', default: 'Role')}"/>
         </tr>
         </thead>
         <tbody>
